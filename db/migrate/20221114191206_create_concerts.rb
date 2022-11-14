@@ -4,8 +4,8 @@ class CreateConcerts < ActiveRecord::Migration[6.1]
       t.string :venue
       t.datetime :datetime
       t.string :url
-      t.string :artist_id
-      t.string :city_id
+      t.integer :artist_id
+      t.integer :city_id
 
       t.timestamps
     end

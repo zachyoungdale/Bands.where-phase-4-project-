@@ -3,31 +3,41 @@
 #
 require 'rest-client'
 
-client_id = "MzAzMTkwNzB8MTY2ODQ0NTU3Ni4wMTQzNTYx"
+client_id = 'MzAzMTkwNzB8MTY2ODQ0NTU3Ni4wMTQzNTYx'
+
 cities = [
-    ['San Antonio', 78620], 
-    ['New York', 10013]
+    'San Antonio', 
+    'New York',
+    'Los Angeles',
+    'Chicago',
+    'Philadelphia',
+    'San Francisco',
+    'Washington DC',
+    'Miami',
+    'Austin',
+    'Boston'
 ]
+
+today = Date.today
+two_years_time = today + 730
 
 cities.length().times do |i|
 
-    response = RestClient.get
-    #san antonio
-    "https://api.seatgeek.com/2/events?geoip=#{cities[i][1]}&client_id=#{client_id}"
+    response = RestClient.get("https://api.seatgeek.com/2/events?venue.city=#{cities[i].gsub(" ", "-")}&per_page=1000&type=concert&datetime_utc.gte=#{today}&datetime_utc.lte=#{two_years_time}&client_id=#{client_id}")
 
     result = JSON.parse(response)
 
     events = result["events"]
 
     events.each do |event|
-        Artist.create(
-            name: event["performers"]["name"],
-            image: event["performers"]["image"]
+        Artist.find_or_create_by(
+            name: event["performers"][0]["name"],
+            image: event["performers"][0]["image"]
         )
     end
 
     City.create(
-        name: cities[i][0]
+        name: cities[i]
     )
 
     events.each do |event|
@@ -35,8 +45,8 @@ cities.length().times do |i|
             venue: event["venue"]["name"],
             datetime: event["datetime_utc"],
             url: event["url"],
-            artist_id: Artist.find_by(name: event["performers"]["name"]).id,
-            city_id: City.find_by(name: event["city"]).id
+            artist_id: Artist.find_by(name: event["performers"][0]["name"]).id,
+            city_id: i+1
         )
     end
 
