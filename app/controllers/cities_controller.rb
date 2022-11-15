@@ -13,6 +13,11 @@ class CitiesController < ApplicationController
     render json: @city
   end
 
+  # GET /cities/1/concerts
+  def show_cities
+    render json: set_city.concerts
+  end
+
   # POST /cities
   def create
     @city = City.new(city_params)
