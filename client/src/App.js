@@ -1,6 +1,6 @@
 import "./App.css";
 import SpotifyLogin from "./SpotifyLogin";
-import ConcertPage from "./ConcertPage.js"
+import ConcertPage from "./ConcertPage";
 
 function App() {
   return (
