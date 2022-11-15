@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useEffect } from "react";
 import SpotifyGetArtists from "./SpotifyGetArtists";
 
@@ -20,7 +21,7 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
   return paramsSplitUp;
 };
 
-function SpotifyLogin() {
+function SpotifyLogin({ spotifyArtists, setSpotifyArtists }) {
   useEffect(() => {
     if (window.location.hash) {
       const { access_token, expires_in, token_type } =
@@ -31,15 +32,31 @@ function SpotifyLogin() {
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("expiresIn", expires_in);
       localStorage.setItem("tokenType", token_type);
+      handleGetArtists(access_token);
     }
   }, []);
   function handleLogin() {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
   }
+
+  const handleGetArtists = (token) => {
+    axios
+      .get("https://api.spotify.com/v1/me/top/artists?limit=40", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        setSpotifyArtists(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <button onClick={handleLogin}>LOGIN TO SPOTIFY</button>
-      <SpotifyGetArtists />
+      <SpotifyGetArtists spotifyArtists={spotifyArtists} />
     </div>
   );
 }
