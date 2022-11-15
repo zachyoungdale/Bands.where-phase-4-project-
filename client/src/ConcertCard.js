@@ -7,7 +7,7 @@ function ConcertCard(props) {
     // npm install --save react-moment
     // npminstall --save moment-timezone
     
-    console.log(props)
+    // console.log(props)
     return (
         <div>
             <img alt={props.artist} src={props.artistImage}></img>

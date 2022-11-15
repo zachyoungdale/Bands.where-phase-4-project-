@@ -4,12 +4,28 @@ import ConcertCard from './ConcertCard.js'
 function ConcertPage() {
 
     const [concerts, setConcerts] = useState([])
-    // const [id, setId] = useState(0)
 
     function handleChange(event){
         fetch(`http://localhost:3000/cities/${event.target.value}/concerts`)
         .then((response) => response.json())
-        .then(data => setConcerts(data))
+        .then(data => {
+            setConcerts(data)
+        })
+    }
+
+    function handleSort(event){
+        if (event.target.value === "artist"){
+            setConcerts([...concerts].sort((a, b) => a.artist.name.localeCompare(b.artist.name))
+            )
+        }
+        else if (event.target.value === "venue"){
+            setConcerts([...concerts].sort((a, b) => a.venue.localeCompare(b.venue))
+            )
+        }
+        else {
+            setConcerts([...concerts].sort((a, b) => a.datetime.localeCompare(b.datetime))
+            )
+        }
     }
   
     return (
@@ -26,6 +42,12 @@ function ConcertPage() {
                 <option value="8">Miami</option>
                 <option value="9">Austin</option>
                 <option value="10">Boston</option>
+            </select>
+
+            <select name="sortBy" onChange={handleSort} >
+                <option value="date">Sort by Date</option>
+                <option value="artist">Sort by Artist</option>
+                <option value="venue">Sort by Venue</option>    
             </select>
 
             {concerts.map(concert => (
