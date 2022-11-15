@@ -12,7 +12,7 @@ cities = [
     'Chicago',
     'Philadelphia',
     'San Francisco',
-    'Washington DC',
+    'Nashville',
     'Miami',
     'Austin',
     'Boston'

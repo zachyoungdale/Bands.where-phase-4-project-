@@ -40,7 +40,7 @@ function ConcertPage() {
         <option value="4">Chicago</option>
         <option value="5">Philadelphia</option>
         <option value="6">San Francisco</option>
-        <option value="7">Washington DC</option>
+        <option value="7">Nashville</option>
         <option value="8">Miami</option>
         <option value="9">Austin</option>
         <option value="10">Boston</option>
