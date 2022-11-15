@@ -11,7 +11,7 @@ function handleSubmit(e) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify({username}),
     })
       .then((r) => r.json())
       .then((user) => onLogin(user));
@@ -20,6 +20,8 @@ function handleSubmit(e) {
     return(
         <div>
             <form onSubmit={handleSubmit}>
+                <h3>Login With Username</h3>
+                <label htmlFor="username">Username: </label>
                 <input 
                 type="text"
                 value={username}
