@@ -3,6 +3,7 @@ import ConcertCard from "./ConcertCard.js";
 
 function ConcertPage({ spotifyArtists }) {
   const [concerts, setConcerts] = useState([]);
+  const [showsAll, setShowsAll] = useState(true)
 
   function handleChange(event) {
     fetch(`/cities/${event.target.value}/concerts`)
@@ -26,16 +27,25 @@ function ConcertPage({ spotifyArtists }) {
     }
   }
 
-  const filteredArray = spotifyArtists?.items?.map((artist) => artist.name);
-
-  const filteredConcertsArray = concerts.filter((concert) => {
-    if (filteredArray.includes(concert.artist.name)) {
-      return concert;
+  let concertsArray = [];
+  if (!showsAll){
+    if (!spotifyArtists.items) {
+      alert('You are not logged in')
+      concertsArray = concerts;
+    } else {
+      const filteredArray = spotifyArtists?.items?.map((artist) => artist.name);
+      concertsArray = concerts.filter((concert) => {
+        if (filteredArray.includes(concert.artist.name)) {
+          return concert;
+        }
+      });
     }
-  });
+  } else {
+    concertsArray = concerts;
+  }
 
   const newObj = {};
-  for (const c of filteredConcertsArray) {
+  for (const c of concertsArray) {
     if (!newObj[c.artist.name + c.venue]) {
       newObj[c.artist.name + c.venue] = {
         id: c.id,
@@ -86,6 +96,10 @@ function ConcertPage({ spotifyArtists }) {
         <option value="artist">Sort by Artist</option>
         <option value="venue">Sort by Venue</option>
       </select>
+
+      <button onClick={(e) => setShowsAll(true)}>Show All Concerts</button>
+      <button onClick={(e) => setShowsAll(false)}>Show Concerts by My Artists</button>
+
 
       {Object.values(newObj).map((concert) => (
         <ConcertCard
