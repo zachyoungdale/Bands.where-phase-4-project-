@@ -8,13 +8,7 @@ function SpotifyGetArtists({ spotifyArtists }) {
       setToken(localStorage.getItem("accessToken"));
     }
   }, []);
-  return (
-    <div>
-      {spotifyArtists?.items
-        ? spotifyArtists.items.map((item) => <p>{item.name}</p>)
-        : null}
-    </div>
-  );
+  return <div></div>;
 }
 
 export default SpotifyGetArtists;

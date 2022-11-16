@@ -21,7 +21,7 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
   return paramsSplitUp;
 };
 
-function SpotifyLogin({ spotifyArtists, setSpotifyArtists }) {
+function SpotifyLogin({ spotifyArtists, setSpotifyArtists, setSpotifyUser }) {
   useEffect(() => {
     if (window.location.hash) {
       const { access_token, expires_in, token_type } =
@@ -33,6 +33,7 @@ function SpotifyLogin({ spotifyArtists, setSpotifyArtists }) {
       localStorage.setItem("expiresIn", expires_in);
       localStorage.setItem("tokenType", token_type);
       handleGetArtists(access_token);
+      handleGetSpotifyUser(access_token);
     }
   }, []);
   function handleLogin() {
@@ -52,6 +53,16 @@ function SpotifyLogin({ spotifyArtists, setSpotifyArtists }) {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const handleGetSpotifyUser = (token) => {
+    axios
+      .get("https://api.spotify.com/v1/me", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => setSpotifyUser(response.data))
+      .catch((error) => console.log(error));
   };
   return (
     <div>
