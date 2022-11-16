@@ -1,4 +1,18 @@
-function ProfilePage({ spotifyUser, spotifyArtists }) {
+import MyConcertCard from "./MyConcertCard";
+
+function ProfilePage({ spotifyUser, spotifyArtists, usersConcerts }) {
+
+const myConcerts = usersConcerts.map((concert) => {
+  return <MyConcertCard 
+  id={concert.id}
+  key={concert.id}
+  venue={concert.venue}
+  datetime={concert.datetime}
+  url={concert.url}
+  artist={concert.artist.name}
+  artistImage={concert.artist.image}
+  />
+})
 
   function profileImage(){
     if (spotifyUser?.images?.length > 0){
@@ -16,6 +30,8 @@ function ProfilePage({ spotifyUser, spotifyArtists }) {
       {spotifyArtists?.items
         ? spotifyArtists.items.map((artist) => <h4>{artist.name}</h4>)
         : null}
+    <h3>My Concerts: </h3>
+      {myConcerts}
     </div>
   );
 }

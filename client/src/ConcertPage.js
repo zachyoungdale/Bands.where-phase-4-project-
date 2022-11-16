@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ConcertCard from "./ConcertCard.js";
 
-function ConcertPage({ spotifyArtists }) {
+function ConcertPage({ spotifyArtists, setUsersConcerts }) {
   const [concerts, setConcerts] = useState([]);
   const [showsAll, setShowsAll] = useState(true)
 
@@ -103,12 +103,15 @@ function ConcertPage({ spotifyArtists }) {
 
       {Object.values(newObj).map((concert) => (
         <ConcertCard
+          setUsersConcerts={setUsersConcerts}
+          id={concert.id}
           key={concert.id}
           venue={concert.venue}
           datetime={concert.datetime}
           url={concert.url}
           artist={concert.artist.name}
           artistImage={concert.artist.image}
+          concert={concert}
         />
       ))}
     </div>
