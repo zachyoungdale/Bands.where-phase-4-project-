@@ -21,7 +21,14 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
   return paramsSplitUp;
 };
 
-function SpotifyLogin({ spotifyArtists, setSpotifyArtists, setSpotifyUser }) {
+function SpotifyLogin({
+  spotifyArtists,
+  setSpotifyArtists,
+  setSpotifyUser,
+  handleGetArtists,
+  handleGetSpotifyUser,
+  handleLogout,
+}) {
   useEffect(() => {
     if (window.location.hash) {
       const { access_token, expires_in, token_type } =
@@ -40,33 +47,10 @@ function SpotifyLogin({ spotifyArtists, setSpotifyArtists, setSpotifyUser }) {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
   }
 
-  const handleGetArtists = (token) => {
-    axios
-      .get("https://api.spotify.com/v1/me/top/artists?limit=40", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((response) => {
-        setSpotifyArtists(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const handleGetSpotifyUser = (token) => {
-    axios
-      .get("https://api.spotify.com/v1/me", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((response) => setSpotifyUser(response.data))
-      .catch((error) => console.log(error));
-  };
   return (
     <div>
       <button onClick={handleLogin}>LOGIN TO SPOTIFY</button>
+      <button onClick={handleLogout}>Logout</button>
       <SpotifyGetArtists spotifyArtists={spotifyArtists} />
     </div>
   );
