@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ConcertCard from "./ConcertCard.js";
 
-function ConcertPage() {
+function ConcertPage({ spotifyArtists }) {
   const [concerts, setConcerts] = useState([]);
 
   function handleChange(event) {
@@ -26,9 +26,13 @@ function ConcertPage() {
     }
   }
 
-  // const filterArray = ['Post Malone', 'Fletcher'];
+  const filteredArray = spotifyArtists?.items?.map((artist) => artist.name);
 
-  // const filteredConcerts = concerts.filter(concert => filterArray.includes(concert.artist.name))
+  const filteredConcertsArray = concerts.filter((concert) => {
+    if (filteredArray.includes(concert.artist.name)) {
+      return concert;
+    }
+  });
 
   return (
     <div>
@@ -52,7 +56,7 @@ function ConcertPage() {
         <option value="venue">Sort by Venue</option>
       </select>
 
-      {concerts.map((concert) => (
+      {filteredConcertsArray.map((concert) => (
         <ConcertCard
           key={concert.id}
           venue={concert.venue}
