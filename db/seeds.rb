@@ -22,7 +22,7 @@ today = Date.today
 two_years_time = today + 730
 
 cities.length().times do |i|
-
+    puts "in cities loop"
     response = RestClient.get("https://api.seatgeek.com/2/events?venue.city=#{cities[i].gsub(" ", "-")}&per_page=1000&type=concert&datetime_utc.gte=#{today}&datetime_utc.lte=#{two_years_time}&client_id=#{client_id}")
 
     result = JSON.parse(response)
@@ -41,6 +41,7 @@ cities.length().times do |i|
     )
 
     events.each do |event|
+        puts "in events loop"
         Concert.create(
             venue: event["venue"]["name"],
             datetime: event["datetime_utc"],
