@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-function SpotifyGetArtists({ spotifyArtists }) {
+function SpotifyGetArtists() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
