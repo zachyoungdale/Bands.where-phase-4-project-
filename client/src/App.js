@@ -10,6 +10,7 @@ import NavBar from "./NavBar";
 function App() {
   const [spotifyArtists, setSpotifyArtists] = useState({});
   const [spotifyUser, setSpotifyUser] = useState({});
+  const [logoutClick, setLogoutClick] = useState(false);
 
   const handleGetArtists = (token) => {
     axios
@@ -49,6 +50,7 @@ function App() {
 
   function handleLogout() {
     localStorage.removeItem("accessToken");
+    window.location.reload();
   }
 
   return (
