@@ -11,6 +11,7 @@ function App() {
   const [spotifyArtists, setSpotifyArtists] = useState({});
   const [spotifyUser, setSpotifyUser] = useState({});
   const [logoutClick, setLogoutClick] = useState(false);
+  const [usersConcerts, setUsersConcerts] = useState([]);
 
   const handleGetArtists = (token) => {
     axios
@@ -69,12 +70,13 @@ function App() {
         </Route>
         <Route path="/profile">
           <ProfilePage
+          usersConcerts={usersConcerts}
             spotifyUser={spotifyUser}
             spotifyArtists={spotifyArtists}
           />
         </Route>
         <Route path="/concerts">
-          <ConcertPage spotifyArtists={spotifyArtists} />
+          <ConcertPage spotifyArtists={spotifyArtists} setUsersConcerts={setUsersConcerts}/>
         </Route>
       </Switch>
     </div>

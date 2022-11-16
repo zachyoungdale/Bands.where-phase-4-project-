@@ -1,18 +1,22 @@
 import Moment from 'react-moment'
 
-function ConcertCard(props) {
+function ConcertCard({setUsersConcerts, id, venue, datetime, url, artist, artistImage, concert}) {
+
+  function handleGoing(concertObj) {
+    setUsersConcerts(prev => [...prev, concertObj])
+  }
         
     function dateAndLinks(){
-        if (Array.isArray(props.datetime)) {
+        if (Array.isArray(datetime)) {
             return (
                 <div>
                 <h4>Showings</h4>
-                {props.datetime.map((datetime, i) => {
+                {datetime.map((datetime, i) => {
                     return (
                         <div>
                             <Moment date={datetime} format="LLLL"/>
                             <br></br>
-                            <a href={props.url[i]}>Buy Tickets</a>
+                            <a href={url[i]}>Buy Tickets</a>
                         </div>
                     )
                 })}
@@ -21,9 +25,9 @@ function ConcertCard(props) {
         } else {
             return (
                 <div>
-                    <Moment date={props.datetime} format="LLLL"/>
+                    <Moment date={datetime} format="LLLL"/>
                     <br></br>
-                    <a href={props.url}>Buy Tickets</a>
+                    <a href={url}>Buy Tickets</a>
                 </div>
             )
         }
@@ -31,10 +35,11 @@ function ConcertCard(props) {
 
     return (
         <div>
-            <img alt={props.artist} src={props.artistImage}></img>
-            <p>{props.artist}</p>
-            <p>at {props.venue}</p>
+            <img alt={artist} src={artistImage}></img>
+            <p>{artist}</p>
+            <p>at {venue}</p>
             {dateAndLinks()}
+            <button onClick={(e) => handleGoing(concert)}>I'm Going to This Concert!</button>
         </div>
     )
 
