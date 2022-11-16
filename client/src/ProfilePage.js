@@ -1,9 +1,10 @@
 import MyConcertCard from "./MyConcertCard";
 
-function ProfilePage({ spotifyUser, spotifyArtists, usersConcerts }) {
+function ProfilePage({ spotifyUser, spotifyArtists, usersConcerts, setUsersConcerts }) {
 
 const myConcerts = usersConcerts.map((concert) => {
   return <MyConcertCard 
+  setUsersConcerts={setUsersConcerts}
   id={concert.id}
   key={concert.id}
   venue={concert.venue}
@@ -11,6 +12,7 @@ const myConcerts = usersConcerts.map((concert) => {
   url={concert.url}
   artist={concert.artist.name}
   artistImage={concert.artist.image}
+  concert={concert}
   />
 })
 

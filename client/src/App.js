@@ -70,6 +70,7 @@ function App() {
         </Route>
         <Route path="/profile">
           <ProfilePage
+          setUsersConcerts={setUsersConcerts}
           usersConcerts={usersConcerts}
             spotifyUser={spotifyUser}
             spotifyArtists={spotifyArtists}
