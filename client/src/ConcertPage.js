@@ -1,8 +1,10 @@
 import { useState } from "react";
 import ConcertCard from "./ConcertCard.js";
 
-function ConcertPage() {
+function ConcertPage(spotifyArtists={spotifyArtists}) {
   const [concerts, setConcerts] = useState([]);
+
+  console.log(spotifyArtists.items)
 
   function handleChange(event) {
     fetch(`/cities/${event.target.value}/concerts`)
@@ -26,9 +28,34 @@ function ConcertPage() {
     }
   }
 
-  // const filterArray = ['Post Malone', 'Fletcher'];
+  // change this array to the list of spotifyArtists
+  const filterArray = ['Post Malone', 'Fletcher', 'Turnover', 'Secrets', 'Trans-Siberian Orchestra', 'The Flaming Lips', 'Trampled by Turtles', 'Christian Scott', 'Bobby Shmurda'];
 
-  // const filteredConcerts = concerts.filter(concert => filterArray.includes(concert.artist.name))
+  const filteredConcerts = concerts.filter(concert => filterArray.includes(concert.artist.name))
+
+  const newObj = {}
+  for (const c of filteredConcerts){
+    if (!newObj[c.artist.name + c.venue]){
+        newObj[c.artist.name + c.venue] = {id: c.id, venue: c.venue, datetime: c.datetime, url: c.url, artist: {id: c.artist.id, name: c.artist.name, image: c.artist.image}, city: {id: c.city.id, name: c.city.name}}
+    } else {
+        //add showings
+        let preexistingDatetime = newObj[c.artist.name + c.venue].datetime
+        if (!Array.isArray(preexistingDatetime)){
+            preexistingDatetime = [preexistingDatetime, c.datetime]
+        } else {
+            preexistingDatetime.push(c.datetime)
+        }
+        newObj[c.artist.name + c.venue].datetime = preexistingDatetime
+        //add urls
+        let preexistingLinks = newObj[c.artist.name + c.venue].url
+        if (!Array.isArray(preexistingLinks)){
+            preexistingLinks = [preexistingLinks, c.url]
+        } else {
+            preexistingLinks.push(c.url)
+        }
+        newObj[c.artist.name + c.venue].url = preexistingLinks
+    }
+  }
 
   return (
     <div>
@@ -52,7 +79,7 @@ function ConcertPage() {
         <option value="venue">Sort by Venue</option>
       </select>
 
-      {concerts.map((concert) => (
+      {Object.values(newObj).map((concert) => (
         <ConcertCard
           key={concert.id}
           venue={concert.venue}
