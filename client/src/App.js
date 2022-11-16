@@ -15,7 +15,7 @@ function App() {
         setSpotifyArtists={setSpotifyArtists}
         setSpotifyUser={setSpotifyUser}
       />
-      <ConcertPage />
+      <ConcertPage spotifyArtists={spotifyArtists} />
       <ProfilePage spotifyUser={spotifyUser} spotifyArtists={spotifyArtists} />
     </div>
   );

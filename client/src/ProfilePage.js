@@ -1,5 +1,4 @@
 function ProfilePage({ spotifyUser, spotifyArtists }) {
-  console.log(spotifyUser);
   return (
     <div>
       <h1>{spotifyUser?.display_name}</h1>
