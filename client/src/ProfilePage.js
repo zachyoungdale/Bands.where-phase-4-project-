@@ -1,7 +1,7 @@
 function ProfilePage({ spotifyUser, spotifyArtists }) {
 
   function profileImage(){
-    if (!!spotifyUser?.images){
+    if (spotifyUser?.images?.length > 0){
       return (
         <img src={spotifyUser?.images[0].url} alt=''></img>
       )
