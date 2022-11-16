@@ -34,6 +34,37 @@ function ConcertPage({ spotifyArtists }) {
     }
   });
 
+  const newObj = {};
+  for (const c of filteredConcertsArray) {
+    if (!newObj[c.artist.name + c.venue]) {
+      newObj[c.artist.name + c.venue] = {
+        id: c.id,
+        venue: c.venue,
+        datetime: c.datetime,
+        url: c.url,
+        artist: { id: c.artist.id, name: c.artist.name, image: c.artist.image },
+        city: { id: c.city.id, name: c.city.name },
+      };
+    } else {
+      //add showings
+      let preexistingDatetime = newObj[c.artist.name + c.venue].datetime;
+      if (!Array.isArray(preexistingDatetime)) {
+        preexistingDatetime = [preexistingDatetime, c.datetime];
+      } else {
+        preexistingDatetime.push(c.datetime);
+      }
+      newObj[c.artist.name + c.venue].datetime = preexistingDatetime;
+      //add urls
+      let preexistingLinks = newObj[c.artist.name + c.venue].url;
+      if (!Array.isArray(preexistingLinks)) {
+        preexistingLinks = [preexistingLinks, c.url];
+      } else {
+        preexistingLinks.push(c.url);
+      }
+      newObj[c.artist.name + c.venue].url = preexistingLinks;
+    }
+  }
+
   return (
     <div>
       <select name="cities" onChange={handleChange}>
@@ -56,7 +87,7 @@ function ConcertPage({ spotifyArtists }) {
         <option value="venue">Sort by Venue</option>
       </select>
 
-      {filteredConcertsArray.map((concert) => (
+      {Object.values(newObj).map((concert) => (
         <ConcertCard
           key={concert.id}
           venue={concert.venue}
