@@ -52,13 +52,13 @@ function SpotifyLogin({
       <div className="flex flex-col ">
         <button
           onClick={handleLogin}
-          className="bg-blue-500 font-sans font-extrabold p-5 rounded-xl text-3xl m-5 hover:bg-blue-600"
+          className="bg-black font-sans font-extrabold p-5 rounded-xl text-6xl m-5 hover:bg-blue-600 text-white"
         >
           LOGIN TO SPOTIFY
         </button>
         <button
           onClick={handleLogout}
-          className="bg-blue-500 font-sans font-extrabold p-5 rounded-xl text-3xl m-5 hover:bg-blue-600"
+          className="bg-black font-sans font-extrabold p-5 rounded-xl text-6xl m-5 hover:bg-blue-600 text-white"
         >
           LOGOUT
         </button>

@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <div>
       <nav className="flex items-center justify-between p-10 mx-auto bg-black">
-        <h1 className="text-white font-sans font-extrabold text-2xl">
+        <h1 className="text-white font-sans font-extrabold text-4xl">
           Bands.where
         </h1>
         <NavLink

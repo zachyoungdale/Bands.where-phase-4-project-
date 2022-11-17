@@ -81,7 +81,7 @@ function ConcertPage({ spotifyArtists, setUsersConcerts }) {
         <select
           name="cities"
           onChange={handleChange}
-          className="bg-white text-black p-2 rounded-xl font-sans text-lg"
+          className="bg-white text-black p-2 rounded-xl font-sans text-lg font-bold"
         >
           <option value="">Select your city...</option>
           <option value="1">San Antonio</option>
@@ -99,7 +99,7 @@ function ConcertPage({ spotifyArtists, setUsersConcerts }) {
         <select
           name="sortBy"
           onChange={handleSort}
-          className="bg-white text-black p-2 rounded-xl font-sans text-lg"
+          className="bg-white text-black p-2 rounded-xl font-sans text-lg font-bold"
         >
           <option value="date">Sort by Date</option>
           <option value="artist">Sort by Artist</option>
@@ -108,13 +108,13 @@ function ConcertPage({ spotifyArtists, setUsersConcerts }) {
 
         <button
           onClick={(e) => setShowsAll(true)}
-          className="bg-white rounded-xl text-black p-2 text-lg hover:bg-blue-500"
+          className="bg-white rounded-xl text-black p-2 text-lg hover:bg-blue-500 font-bold"
         >
           Show All Concerts
         </button>
         <button
           onClick={(e) => setShowsAll(false)}
-          className="bg-white rounded-xl text-black p-2 text-lg hover:bg-blue-500"
+          className="bg-white rounded-xl text-black p-2 text-lg hover:bg-blue-500 font-bold"
         >
           Show Concerts by My Artists
         </button>
