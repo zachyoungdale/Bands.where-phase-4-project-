@@ -3,7 +3,7 @@ import ConcertCard from "./ConcertCard.js";
 
 function ConcertPage({ spotifyArtists, setUsersConcerts }) {
   const [concerts, setConcerts] = useState([]);
-  const [showsAll, setShowsAll] = useState(true)
+  const [showsAll, setShowsAll] = useState(true);
 
   function handleChange(event) {
     fetch(`/cities/${event.target.value}/concerts`)
@@ -28,9 +28,9 @@ function ConcertPage({ spotifyArtists, setUsersConcerts }) {
   }
 
   let concertsArray = [];
-  if (!showsAll){
+  if (!showsAll) {
     if (!spotifyArtists.items) {
-      alert('You are not logged in')
+      alert("You are not logged in");
       concertsArray = concerts;
     } else {
       const filteredArray = spotifyArtists?.items?.map((artist) => artist.name);
@@ -77,29 +77,48 @@ function ConcertPage({ spotifyArtists, setUsersConcerts }) {
 
   return (
     <div>
-      <select name="cities" onChange={handleChange}>
-        <option value="">Select your city...</option>
-        <option value="1">San Antonio</option>
-        <option value="2">New York</option>
-        <option value="3">Los Angeles</option>
-        <option value="4">Chicago</option>
-        <option value="5">Philadelphia</option>
-        <option value="6">San Francisco</option>
-        <option value="7">Nashville</option>
-        <option value="8">Miami</option>
-        <option value="9">Austin</option>
-        <option value="10">Boston</option>
-      </select>
+      <div className="flex items-center bg-black p-6 justify-around bg-opacity-75">
+        <select
+          name="cities"
+          onChange={handleChange}
+          className="bg-white text-black p-2 rounded-xl font-sans text-lg"
+        >
+          <option value="">Select your city...</option>
+          <option value="1">San Antonio</option>
+          <option value="2">New York</option>
+          <option value="3">Los Angeles</option>
+          <option value="4">Chicago</option>
+          <option value="5">Philadelphia</option>
+          <option value="6">San Francisco</option>
+          <option value="7">Nashville</option>
+          <option value="8">Miami</option>
+          <option value="9">Austin</option>
+          <option value="10">Boston</option>
+        </select>
 
-      <select name="sortBy" onChange={handleSort}>
-        <option value="date">Sort by Date</option>
-        <option value="artist">Sort by Artist</option>
-        <option value="venue">Sort by Venue</option>
-      </select>
+        <select
+          name="sortBy"
+          onChange={handleSort}
+          className="bg-white text-black p-2 rounded-xl font-sans text-lg"
+        >
+          <option value="date">Sort by Date</option>
+          <option value="artist">Sort by Artist</option>
+          <option value="venue">Sort by Venue</option>
+        </select>
 
-      <button onClick={(e) => setShowsAll(true)}>Show All Concerts</button>
-      <button onClick={(e) => setShowsAll(false)}>Show Concerts by My Artists</button>
-
+        <button
+          onClick={(e) => setShowsAll(true)}
+          className="bg-white rounded-xl text-black p-2 text-lg hover:bg-blue-500"
+        >
+          Show All Concerts
+        </button>
+        <button
+          onClick={(e) => setShowsAll(false)}
+          className="bg-white rounded-xl text-black p-2 text-lg hover:bg-blue-500"
+        >
+          Show Concerts by My Artists
+        </button>
+      </div>
 
       {Object.values(newObj).map((concert) => (
         <ConcertCard

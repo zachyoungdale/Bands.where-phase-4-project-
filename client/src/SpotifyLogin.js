@@ -48,14 +48,21 @@ function SpotifyLogin({
   }
 
   return (
-    <div>
-      <button
-        onClick={handleLogin}
-        className="bg-green-500 font-sans font-extrabold p-3 rounded-xl"
-      >
-        LOGIN TO SPOTIFY
-      </button>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="flex justify-center items-center m-40">
+      <div className="flex flex-col ">
+        <button
+          onClick={handleLogin}
+          className="bg-blue-500 font-sans font-extrabold p-5 rounded-xl text-3xl m-5 hover:bg-blue-600"
+        >
+          LOGIN TO SPOTIFY
+        </button>
+        <button
+          onClick={handleLogout}
+          className="bg-blue-500 font-sans font-extrabold p-5 rounded-xl text-3xl m-5 hover:bg-blue-600"
+        >
+          LOGOUT
+        </button>
+      </div>
       <SpotifyGetArtists spotifyArtists={spotifyArtists} />
     </div>
   );
