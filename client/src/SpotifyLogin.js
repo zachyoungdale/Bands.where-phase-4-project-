@@ -49,7 +49,10 @@ function SpotifyLogin({
 
   return (
     <div>
-      <button onClick={handleLogin} className="bg-green-400">
+      <button
+        onClick={handleLogin}
+        className="bg-green-500 font-sans font-extrabold p-3 rounded-xl"
+      >
         LOGIN TO SPOTIFY
       </button>
       <button onClick={handleLogout}>Logout</button>
