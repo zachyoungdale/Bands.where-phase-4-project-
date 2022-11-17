@@ -28,7 +28,10 @@ function ConcertCard({
                 <div className="font-sans font-bold">
                   <Moment date={datetime} format="LLLL" />
                 </div>
-                <a href={url[i]} className=" font-sans font-bold text-blue-500">
+                <a
+                  href={url[i]}
+                  className=" font-sans font-bold text-blue-500 text-xl"
+                >
                   Buy Tickets
                 </a>
               </div>
@@ -38,10 +41,10 @@ function ConcertCard({
       );
     } else {
       return (
-        <div className="font-sans font-bold">
+        <div className="font-sans font-bold text-xl">
           <Moment date={datetime} format="LLLL" />
           <br></br>
-          <a href={url} className=" font-sans font-bold text-blue-500">
+          <a href={url} className=" font-sans font-bold text-blue-500 text-xl">
             Buy Tickets
           </a>
         </div>
