@@ -55,7 +55,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="bg-[url('/background.jpg')] bg-auto bg-repeat b-center min-h-screen w-screen relative">
       <NavBar />
       <Switch>
         <Route exact path="/">
@@ -70,14 +70,17 @@ function App() {
         </Route>
         <Route path="/profile">
           <ProfilePage
-          setUsersConcerts={setUsersConcerts}
-          usersConcerts={usersConcerts}
+            setUsersConcerts={setUsersConcerts}
+            usersConcerts={usersConcerts}
             spotifyUser={spotifyUser}
             spotifyArtists={spotifyArtists}
           />
         </Route>
         <Route path="/concerts">
-          <ConcertPage spotifyArtists={spotifyArtists} setUsersConcerts={setUsersConcerts}/>
+          <ConcertPage
+            spotifyArtists={spotifyArtists}
+            setUsersConcerts={setUsersConcerts}
+          />
         </Route>
       </Switch>
     </div>
